@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ServerException;
 use React\EventLoop\LoopInterface;
 
 require __DIR__ . '/vendor/autoload.php';
@@ -18,9 +19,12 @@ $headers = [
     'x-hq-client'   => 'iOS/1.2.4 b59',
 ];
 
-$response = $client->get('https://api-quiz.hype.space/shows/now?type=hq&userId=' . getenv('HQ_USER_ID'), ['headers' => $headers]);
-$response = \GuzzleHttp\json_decode($response->getBody(), true);
-
+try {
+    $response = $client->get('https://api-quiz.hype.space/shows/now?type=hq&userId=' . getenv('HQ_USER_ID'), ['headers' => $headers]);
+    $response = \GuzzleHttp\json_decode($response->getBody(), true);
+} catch (ServerException $e) {
+    die ('Server error fetching show schedule.');
+}
 $nextShow = new DateTime($response['nextShowTime'] ?? 'now');
 $nextShow->setTimezone(new DateTimeZone('America/Toronto'));
 
