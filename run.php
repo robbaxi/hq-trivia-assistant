@@ -72,7 +72,7 @@ function on_connect(Ratchet\Client\WebSocket $conn, Client $client, string $url,
         function (\Ratchet\RFC6455\Messaging\MessageInterface $msg) use ($conn, $client, $loop) {
 
             // strstr to strip control characters placed in the websocket response by HQ, sneaky sneaky
-            $message = json_decode(strstr($msg, '{'), true);
+            $message = json_decode(strstr($msg->__toString(), '{'), true);
 
             if ($message['type'] === 'broadcastEnded' && !isset($message['reason'])) {
                 $loop->stop();
