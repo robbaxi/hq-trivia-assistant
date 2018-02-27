@@ -49,9 +49,9 @@ Before starting few things: First of all you need to use Mac os (But it's possib
 
 1. Install Charles Proxy (https://www.charlesproxy.com).
 
-2. Install php 7.1 or later so open terminal and paste ``` bash curl -s https://php-osx.liip.ch/install.sh | bash -s 7.2 ``` (It will take few minutes to download and install) (press enter)
+2. Install php 7.1 or later so open terminal and paste ``` curl -s https://php-osx.liip.ch/install.sh | -s 7.2 ``` (It will take few minutes to download and install) (press enter)
 
-Make sure that the version is correct by typing ``` bash php -v ``` in terminal if php version is 5.6 or something similar type ``` bash export PATH=/usr/local/php5/bin:$PATH now ``` type ``` bash php -v ``` again and it should say php 7.2 or something similar
+Make sure that the version is correct by typing ``` php -v ``` in terminal if php version is 5.6 or something similar type ``` export PATH=/usr/local/php5/bin:$PATH now ``` type ``` php -v ``` again and it should say php 7.2 or something similar
 
 3. Create a folder anywhere
 
@@ -59,7 +59,10 @@ Make sure that the version is correct by typing ``` bash php -v ``` in terminal 
 
 5. Write cd press space and drag and drop your folder again (press enter)
 
-6. Paste in ``` bash php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" php composer-setup.php php -r "unlink('composer-setup.php');” ```
+6. Paste in ``` php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');" ```
 (press enter)
 
 7. Open your folder and there should be a file named composer.phar select it, press enter and then delete ``` bash .phar ``` extension (so it’s named only composer) and press enter
@@ -101,20 +104,21 @@ On Iphones:
 •	Go to the Settings app, tap Wi-Fi, find the network you are connected to and then tap the blue disclosure arrow to configure the network. Scroll down to the HTTP Proxy setting, tap Manual.
 •	enter in the IPV4 Address you got from your computer. And port 8888
 •	Leave Authentication set to Off.
-• Go to general - about - certificate trust settings and give Charles full root access.
+• Go to general - about - certificate trust settings and give Charles full root access. (Settings > General > About > Certificate Trust Testings)
+
 
 Now open hq trivia app and get back to your computer
 
-10. In terminal type ``` bash cp .env.dist .env ```
+10. In terminal type ``` cp .env.dist .env ```
 
 11. Open your folder and press cmd+shift+. (Don't forger the dot) To see hidden files. Locate .env file and open it with your text editor (text edit, atom, sublime text etc.)
 
-12. In Charles find ``` bash https://api-quiz.hype.space ``` and expand it, locate folder named users and expand it, select a file named me, left click it and press Enable SSL proxying. Then go to contents
+12. In Charles find ``` https://api-quiz.hype.space ``` and expand it, locate folder named users and expand it, select a file named me, left click it and press Enable SSL proxying. Then go to contents
 
-13. Locate the word ``` bash authorization ``` and next to it there is a very long string. Double click it and copy it, but don’t copy the word bearer just what comes after it and paste it into .env file right after ``` bash HQ_BEARER_TOKEN= ```
+13. Locate the word ``` authorization ``` and next to it there is a very long string. Double click it and copy it, but don’t copy the word bearer just what comes after it and paste it into .env file right after ``` HQ_BEARER_TOKEN= ```
 
-14. Select JSON Text below, There should be a string named userId and 8 numbers next to it. Copy them, and paste them into .env file next to ``` bash HQ_USER_ID= ```
+14. Select JSON Text below, There should be a string named userId and 8 numbers next to it. Copy them, and paste them into .env file next to ``` HQ_USER_ID= ```
 
 After that’s done turn the proxy off on your phone ( On Samsung set proxy to none, on android device, open the Settings App then navigate to Security > Clear Credentials (all the way to the bottom). Click Clear credentials and confirm. Navigate to Settings > Lock Screen > Screen Lock and remove the PIN if desired. And On Iphone turn HTTP proxy to off)
 
-And that’s it. Now when the game is starting type ``` bash php run.php ``` in terminal (always make sure you are in your hq assistant directory (if not type cd press space and drag and drop your folder) and everything should work just fine.
+And that’s it. Now when the game is starting type ``` php run.php ``` in terminal (always make sure you are in your hq assistant directory (if not type cd press space and drag and drop your folder) and everything should work just fine.
